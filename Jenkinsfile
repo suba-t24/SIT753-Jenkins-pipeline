@@ -4,50 +4,48 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building the code using Maven...'
-                // Example Maven build command
-                sh 'mvn clean package'
+                echo 'Installing dependencies and building the project with npm...'
+                sh 'npm install'
+                sh 'npm run build'  // Make sure your package.json has a "build" script
             }
         }
 
         stage('Unit and Integration Tests') {
             steps {
-                echo 'Running Unit and Integration Tests with JUnit...'
-                // Run tests using Maven Surefire plugin or equivalent
-                sh 'mvn test'
+                echo 'Running Unit and Integration Tests with npm...'
+                sh 'npm test'  // Ensure you have test scripts configured in package.json
             }
         }
 
         stage('Code Analysis') {
             steps {
                 echo 'Performing static code analysis with SonarQube...'
-                // Example SonarQube scanner command
+                // Example SonarQube scanner for JavaScript
                 // withSonarQubeEnv('MySonarQubeServer') {
-                //     sh 'mvn sonar:sonar'
+                //     sh 'sonar-scanner'
                 // }
             }
         }
 
         stage('Security Scan') {
             steps {
-                echo 'Running security scan using OWASP Dependency-Check...'
-                // Example command to run OWASP Dependency-Check
-                sh 'dependency-check.sh --project MyApp --scan .'
+                echo 'Running security scan using npm audit...'
+                sh 'npm audit --audit-level=moderate'  // Or use other tools like Snyk
             }
         }
 
         stage('Deploy to Staging') {
             steps {
-                echo 'Deploying to Staging environment (e.g., AWS EC2)...'
-                // Example SSH deploy or AWS CLI deploy commands here
-                // sh 'scp target/myapp.jar user@staging-server:/deploy/path'
+                echo 'Deploying to Staging environment...'
+                // Add your deployment commands, e.g., scp, AWS CLI, SSH
+                // sh 'scp -r ./dist user@staging-server:/var/www/app'
             }
         }
 
         stage('Integration Tests on Staging') {
             steps {
-                echo 'Running integration tests on Staging environment with Selenium/Postman...'
-                // Placeholder for running integration tests against staging
+                echo 'Running integration tests on Staging environment...'
+                // Example: Run integration tests against staging URL
                 // sh './run-integration-tests.sh'
             }
         }
@@ -55,8 +53,8 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 echo 'Deploying to Production environment...'
-                // Deploy commands for production environment
-                // sh 'scp target/myapp.jar user@production-server:/deploy/path'
+                // Add your production deployment commands here
+                // sh 'scp -r ./dist user@production-server:/var/www/app'
             }
         }
     }
