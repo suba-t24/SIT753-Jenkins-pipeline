@@ -1,17 +1,18 @@
 {
   "name": "2.2p",
   "version": "1.0.0",
-  "description": "Week 2 workshop",
+  "description": "Week 8 workshop",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "echo \"Build step complete\""
+    "build": "echo \"Build step complete\"",
+    "test": "echo \"Running tests...\" && exit 0"
   },
   "author": "Subathira Thinakaran",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/suba-t24/SIT725.git"
+    "url": "git+https://github.com/suba-t24/SIT753-Jenkins-pipeline.git"
   },
   "dependencies": {
     "express": "^4.21.2"
