@@ -3,6 +3,8 @@ const path = require('path'); // Make sure to include this
 var app = express()
 var port = process.env.port || 3003;
 
+
+
 // Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
 
